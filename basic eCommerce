@@ -1,0 +1,151 @@
+##HTML
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Lagos Fruit Market</title>
+</head>
+<body>
+    <header>
+        <h1>Lagos Fruit Market</h1>
+        <nav>
+            <ul>
+                <li><a href="#fruits">Fruits</a></li>
+                <li><a href="#cart">Cart</a></li>
+                <li><a href="#login">Log In</a></li>
+                <li><a href="#signup">Sign Up</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section id="fruits">
+        <!-- Fruits display goes here -->
+    </section>
+
+    <section id="cart">
+        <!-- Shopping cart goes here -->
+    </section>
+
+    <section id="login">
+        <!-- Login form goes here -->
+    </section>
+
+    <section id="signup">
+        <!-- Sign-up form goes here -->
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+##CSS
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+}
+
+header {
+    background-color: #4CAF50;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+section {
+    margin: 20px;
+}
+
+/* Add more styles as needed */
+
+
+##Javascript
+// Sample data for fruit categories
+const fruitCategories = [
+    { id: 1, name: 'Apples', items: ['Red Apple', 'Green Apple'] },
+    { id: 2, name: 'Bananas', items: ['Yellow Banana'] },
+    { id: 3, name: 'Berries', items: ['Strawberry', 'Blueberry'] },
+    // Add more categories as needed
+];
+
+// Sample data for fruits and their prices
+const fruitPrices = {
+    'Red Apple': 1.5,
+    'Green Apple': 1.8,
+    'Yellow Banana': 1.2,
+    'Strawberry': 2.5,
+    'Blueberry': 3.0,
+    // Add more fruits and prices as needed
+};
+
+// Sample data for user authentication (not secure for production)
+const users = [
+    { username: 'user1', password: 'password1' },
+    { username: 'user2', password: 'password2' },
+    // Add more users as needed
+];
+
+// Sample data for newsletter subscribers
+let newsletterSubscribers = [];
+
+// Sample data for delivery addresses
+let deliveryAddresses = [];
+
+// Function to display fruit categories
+function displayFruitCategories() {
+    const fruitsSection = document.getElementById('fruits');
+
+    fruitCategories.forEach(category => {
+        const categoryDiv = document.createElement('div');
+        categoryDiv.innerHTML = `<h2>${category.name}</h2>`;
+
+        category.items.forEach(item => {
+            const itemDiv = document.createElement('div');
+            itemDiv.innerHTML = `${item} - $${fruitPrices[item].toFixed(2)} <button onclick="addToCart('${item}')">Add to Cart</button>`;
+            categoryDiv.appendChild(itemDiv);
+        });
+
+        fruitsSection.appendChild(categoryDiv);
+    });
+}
+
+// Function to add items to the cart
+function addToCart(item) {
+    const cartSection = document.getElementById('cart');
+    const cartItem = document.createElement('div');
+    cartItem.innerHTML = `${item} - $${fruitPrices[item].toFixed(2)}`;
+    cartSection.appendChild(cartItem);
+}
+
+// Function to toggle between login and sign-up forms
+function toggleForm(formType) {
+    const loginSection = document.getElementById('login');
+    const signupSection = document.getElementById('signup');
+
+    if (formType === 'login') {
+        loginSection.style.display = 'block';
+        signupSection.style.display = 'none';
+    } else {
+        loginSection.style.display = 'none';
+        signupSection.style.display = 'block';
+    }
+}
+
+// Initial function calls
+displayFruitCategories();
