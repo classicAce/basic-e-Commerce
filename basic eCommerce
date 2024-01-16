@@ -149,3 +149,72 @@ function toggleForm(formType) {
 
 // Initial function calls
 displayFruitCategories();
+
+
+*************** OR **********************
+document.addEventListener('DOMContentLoaded', function () {
+    const fruitsSection = document.getElementById('fruits');
+    const cartSection = document.getElementById('cart');
+    const loginSection = document.getElementById('login');
+    const signupSection = document.getElementById('signup');
+
+    // Sample fruit data (replace with your actual data)
+    const fruits = [
+        { id: 1, name: 'Apple', price: 1.5 },
+        { id: 2, name: 'Banana', price: 0.75 },
+        { id: 3, name: 'Orange', price: 1.0 },
+        // Add more fruits as needed
+    ];
+
+    // Sample user data (replace with your actual data)
+    let currentUser = null;
+
+    // Display fruits
+    function displayFruits() {
+        fruitsSection.innerHTML = '';
+        fruits.forEach(fruit => {
+            const card = document.createElement('div');
+            card.className = 'fruit-card';
+            card.innerHTML = `
+                <h3>${fruit.name}</h3>
+                <p>$${fruit.price.toFixed(2)}</p>
+                <button onclick="addToCart(${fruit.id})">Add to Cart</button>
+            `;
+            fruitsSection.appendChild(card);
+        });
+    }
+
+    // Add to cart
+    function addToCart(fruitId) {
+        const selectedFruit = fruits.find(fruit => fruit.id === fruitId);
+        if (selectedFruit) {
+            const cartItem = { id: selectedFruit.id, name: selectedFruit.name, price: selectedFruit.price };
+            updateCart(cartItem);
+        }
+    }
+
+    // Update the cart
+    function updateCart(cartItem) {
+        // Sample cart handling (replace with actual logic)
+        cartSection.innerHTML = '';
+        const cartItemElement = document.createElement('div');
+        cartItemElement.className = 'cart-item';
+        cartItemElement.innerHTML = `
+            <p>${cartItem.name} - $${cartItem.price.toFixed(2)}</p>
+        `;
+        cartSection.appendChild(cartItemElement);
+    }
+
+    // Toggle between login and signup forms
+    function toggleForms() {
+        loginSection.style.display = (loginSection.style.display === 'none') ? 'block' : 'none';
+        signupSection.style.display = (signupSection.style.display === 'none') ? 'block' : 'none';
+    }
+
+    // Event listeners
+    document.getElementById('show-login').addEventListener('click', toggleForms);
+    document.getElementById('show-signup').addEventListener('click', toggleForms);
+
+    // Initial display
+    displayFruits();
+});
